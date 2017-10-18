@@ -1,5 +1,6 @@
 class Node
   attr_accessor :key, :val, :next, :prev
+  
 
   def initialize(key = nil, val = nil)
     @key = key
@@ -21,6 +22,8 @@ class Node
 end
 
 class LinkedList
+  include Enumerable
+  
   def initialize
     @head = Node.new
     @tail = Node.new
@@ -108,7 +111,7 @@ class LinkedList
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, node| acc << "[#{node.key}, #{node.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, node| acc << "[#{node.key}, #{node.val}]" }.join(", ")
+  end
 end
