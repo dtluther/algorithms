@@ -67,29 +67,45 @@ class BinarySearchTree
       found_node.parent = nil
 
     elsif found_node.left && found_node.right
+      # puts "We are deleting #{value}"
       left_max = maximum(found_node.left)
+      # puts "Replacing with left_max: #{left_max.value}"
+      left_max_child = left_max.left ? left_max.left : nil
       @root = left_max if found_node == @root
       
       left_max.left = found_node.left
       left_max.right = found_node.right
       if found_node.parent
         parent = found_node.parent
+        # puts "#{value} has a parent: #{parent.value}"
 
         if found_node.value < parent.value
-          parent.left = nil
+          # puts "#{value} is < #{parent.value}, so assigning parent.left to left_max: #{left_max.value}"
           parent.left = left_max
+          # puts "parent.left.value: #{parent.left.value}"
         else
-          parent.right = nil
           parent.right = left_max
         end
         
         found_node.parent = nil
+        found_node.left = nil
+        found_node.right = nil
+        # puts "left_max.parent: #{left_max.parent.value}"
+        left_max.parent.right = left_max_child if left_max_child
+        p left_max.parent.value
         
       end
 
     else
       @root = nil if found_node == @root
-      child = found_node.left ? found_node.left : found_node.right
+      if found_node.left
+        child = found_node.left
+        found_node.left = nil
+      else
+        child = found_node.right
+        found_node.right = nil
+      end
+
       if found_node.parent
         parent = found_node.parent
         if found_node.value < parent.value
