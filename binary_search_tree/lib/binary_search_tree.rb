@@ -92,7 +92,7 @@ class BinarySearchTree
         found_node.right = nil
         # puts "left_max.parent: #{left_max.parent.value}"
         left_max.parent.right = left_max_child if left_max_child
-        p left_max.parent.value
+        # p left_max.parent.value
         
       end
 
@@ -117,9 +117,6 @@ class BinarySearchTree
       end
     end
       
-
-
-
   end
 
   # helper method for #delete:
@@ -130,18 +127,26 @@ class BinarySearchTree
   end
 
   def depth(tree_node = @root)
+    return -1 if tree_node == nil
+    return 0 if !@root.left && !@root.right
+    [depth(tree_node.left) + 1, depth(tree_node.right) + 1].max
+
   end 
 
   def is_balanced?(tree_node = @root)
+
   end
 
   def in_order_traversal(tree_node = @root, arr = [])
+    return nil unless tree_node
+    in_order_traversal(tree_node.left, arr)
+    arr << tree_node.value
+    in_order_traversal(tree_node.right, arr)
+
+    arr
   end
 
 
   private
-  def subtree(node)
-
-  end
 
 end
