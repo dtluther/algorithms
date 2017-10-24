@@ -10,14 +10,19 @@
 require 'topological_sort'
 
 def install_order(arr)
-    vertices = []
+    max = arr.flatten.max
+    vertices = {}
 
-    arr.each do |tuple|
-        if vertices.map(&:value).include?(tuple[0]) && vertices.map.(&:value).include?(tuple[1])
-            Edge.new
-        Edge.new(Vertex.new(tuple[0]), Vertex.new(tuple[1]))
+    (1..max).each do |id|
+        vertices[id] = Vertex.new(id)
     end
 
-    p arr.map(&:class)
-    topological_sort(arr)
+    arr.each do |tuple|
+        package = tuple[0]
+        dependency = tuple[1]
+        Edge.new(vertices[dependency], vertices[package])
+    end
+
+    topological_sort(vertices.values).map(&:value)
+
 end

@@ -19,8 +19,6 @@ def topological_sort(vertices)
         end
     end
 
-    p queue.map(&:value)
-
     # debugger
     until queue.empty?
         u = queue.shift
@@ -36,12 +34,19 @@ def topological_sort(vertices)
    top
 end
 
-# # debugger displays
-# # disp vertices.map(&:value)
-# # disp top.map(&:value)
-# # disp queue.map(&:value)
-# # disp u.value
-# # disp to_vertex.value
-# # disp u.out_edges.map(&:to_vertex).map(&:value)
+# debugger displays
+# disp vertices.map(&:value)
+# disp top.map(&:value)
+# disp queue.map(&:value)
+# disp u.value
+# disp to_vertex.value
+# disp u.out_edges.map(&:to_vertex).map(&:value)
 
-# Tarian's algorithm
+# # Tarian's algorithm
+# def topological_sort(vertices)
+#     output = []
+
+#     vertices.each do |vertex|
+#         until vertex.out_edges.empty?
+#             vertex.out_edges.each do |out_edge|
+# end
